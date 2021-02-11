@@ -1,6 +1,10 @@
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.text.ParseException;
 
 import javax.swing.*;
@@ -53,7 +57,7 @@ class Ventana extends JFrame{
 		JCheckBox check2=new JCheckBox("interest group fields");
 		JCheckBox check3=new JCheckBox("required field indicators");
 		llenado(GridBagConstraints.HORIZONTAL, 0, 13, 1, 2, check2);
-		llenado(GridBagConstraints.HORIZONTAL, 0, 14, 1, 3, check3);
+		llenado(GridBagConstraints.HORIZONTAL, 0, 14, 1, 2, check3);
 		
 		llenado(GridBagConstraints.HORIZONTAL, 0, 15, 1, 2, new JLabel("             "));
 		
@@ -72,15 +76,18 @@ class Ventana extends JFrame{
 		llenado(GridBagConstraints.HORIZONTAL, 0, 20, 1, 2, check5);
 		llenado(GridBagConstraints.HORIZONTAL, 0, 21, 1, 2, check6);
 		llenado(GridBagConstraints.HORIZONTAL, 0, 22, 1, 3, check7);
+		
 		//------------------------------------------------------------------
 		llenado(GridBagConstraints.HORIZONTAL, 4, 0, 1, 4, new JLabel("                 "));
-		//llenado(GridBagConstraints.CENTER, 4,0,1,4, check7);
-		JLabel label=new JLabel("Preview");
-		llenado(GridBagConstraints.HORIZONTAL, 8, 0, 1, 1, label);
+		JPanel panel1=new JPanel();
+		//panelIzq.setBackground(Color.orange);
+		panel1.setLayout(new FlowLayout());
+		panel1.setBorder(BorderFactory.createTitledBorder("Preview"));
+		panel1.setPreferredSize(new Dimension(225,200));
+		llenado(GridBagConstraints.WEST,5,1,10,18, panel1);//<----------------------------------
 		
 		JLabel label7=new JLabel("Email Adress");
-		llenado(GridBagConstraints.HORIZONTAL, 6, 2, 1, 4, label7);
-		
+		panel1.add(label7).setBounds(0, 0, 10, 15);;
 		MaskFormatter formatter=null;
 		try {
 			formatter=new MaskFormatter("@outlook.com");
@@ -88,7 +95,29 @@ class Ventana extends JFrame{
 			e.printStackTrace();
 		}
 		JFormattedTextField ftf = new JFormattedTextField(formatter);
-		llenado(GridBagConstraints.HORIZONTAL, 6, 3, 1, 5, ftf);
+		panel1.add(ftf);
+		
+		JLabel label8=new JLabel("First Name");
+		panel1.add(label8);
+		
+		JTextField caja3=new JTextField(10);
+		panel1.add(caja3);
+		
+		JLabel label9=new JLabel("Last Name");
+		panel1.add(label9);
+		
+		JTextField caja4=new JTextField(10);
+		panel1.add(caja4);
+		
+		JButton boton=new JButton();
+		boton.setBounds(10, 100, 90, 30);
+		ImageIcon icono=new ImageIcon("boton.png");
+		boton.setIcon(new ImageIcon(icono.getImage().getScaledInstance(boton.getWidth(), boton.getHeight(), Image.SCALE_SMOOTH)));
+		panel1.add(boton);
+		
+		JTextArea escribir=new JTextArea("Escribe aqui...",10,25);
+		JScrollPane scroll=new JScrollPane(escribir);
+		llenado(GridBagConstraints.HORIZONTAL,4,11,30,30, scroll);
 		pack();
 	}
 	public void llenado(int rellenado,int x, int y,int altura,int largo,Component componente) {
